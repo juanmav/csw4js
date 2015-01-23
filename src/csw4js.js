@@ -27,6 +27,7 @@ Csw4js.Namespaces = {
  * */
 
 Csw4js.unmarshaller = new Jsonix.Context([OWS_1_0_0, DC_1_1, DCT, XLink_1_0, CSW_2_0_2]).createUnmarshaller();
+Csw4js.marshaller= new Jsonix.Context([OWS_1_0_0, DC_1_1, DCT, XLink_1_0, CSW_2_0_2]).createMarshaller();
 
 Csw4js.IESelectionNamespaces = function() {
     var namespaces = [];
