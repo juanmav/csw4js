@@ -41,48 +41,20 @@
 <section>
     <script type="text/javascript">
         // by URL via CSW
-        /*var csw = new Csw4js.Csw('http://demo.pycsw.org/cite/csw');
-         // by URL via doc
-         //var csw = new Csw4js.Csw('./pycsw_cite.xml');
-         var records = csw.GetRecords(
-         null,
-         'results',
-         null);
-         // Raw Json
-         console.log(records);
-         // get Title from a Record.
-         console.log(records.value.searchResults.abstractRecord[0].value.dcElement[3].value.content[0]);//*/
+        //var csw = new Csw4js.Csw('http://demo.pycsw.org/cite/csw');
 
-        // Raw XML to Javascript Object
-        //var getRecordDoc = Csw4js.unmarshaller.unmarshalString('<?xml version="1.0" encoding="UTF-8"?> <csw:GetRecords xmlns:csw="http://www.opengis.net/cat/csw/2.0.2" xmlns="http://www.occamlab.com/ctl" xmlns:ctl="http://www.occamlab.com/ctl" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:dct="http://purl.org/dc/terms/" xmlns:gml="http://www.opengis.net/gml" xmlns:ogc="http://www.opengis.net/ogc" xmlns:ows="http://www.opengis.net/ows" xmlns:p="http://teamengine.sourceforge.net/parsers" xmlns:parsers="http://www.occamlab.com/te/parsers" xmlns:saxon="http://saxon.sf.net/" xmlns:te="http://www.occamlab.com/te" xmlns:tec="java:com.occamlab.te.TECore" xmlns:tems="java:com.occamlab.te.web.MonitorServlet" xmlns:xi="http://www.w3.org/2001/XInclude" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:xsd="http://www.w3.org/2001/XMLSchema" maxRecords="10" resultType="results" service="CSW" version="2.0.2"><csw:Query typeNames="csw:Record"><csw:ElementSetName>full</csw:ElementSetName><csw:Constraint version="1.1.0"><ogc:Filter><ogc:BBOX><ogc:PropertyName>ows:BoundingBox</ogc:PropertyName><gml:Envelope srsName="urn:x-ogc:def:crs:EPSG:6.11:4326"><gml:lowerCorner>-80.0 150.0</gml:lowerCorner><gml:upperCorner>80.0 -150.0</gml:upperCorner></gml:Envelope></ogc:BBOX></ogc:Filter></csw:Constraint></csw:Query></csw:GetRecords>');
-        //var getRecordDoc = Csw4js.unmarshaller.unmarshalString('<?xml version="1.0" encoding="UTF-8"?> <csw:GetRecords xmlns:csw="http://www.opengis.net/cat/csw/2.0.2" xmlns="http://www.occamlab.com/ctl" xmlns:ctl="http://www.occamlab.com/ctl" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:dct="http://purl.org/dc/terms/" xmlns:gml="http://www.opengis.net/gml" xmlns:ogc="http://www.opengis.net/ogc" xmlns:ows="http://www.opengis.net/ows" xmlns:p="http://teamengine.sourceforge.net/parsers" xmlns:parsers="http://www.occamlab.com/te/parsers" xmlns:saxon="http://saxon.sf.net/" xmlns:te="http://www.occamlab.com/te" xmlns:tec="java:com.occamlab.te.TECore" xmlns:tems="java:com.occamlab.te.web.MonitorServlet" xmlns:xi="http://www.w3.org/2001/XInclude" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:xsd="http://www.w3.org/2001/XMLSchema" maxRecords="10" resultType="results" service="CSW" version="2.0.2"><csw:Query typeNames="csw:Record"><csw:ElementSetName>full</csw:ElementSetName><csw:Constraint version="1.1.0"><ogc:Filter><ogc:PropertyIsLike escapeChar="\" singleChar="_" wildCard="%"><ogc:PropertyName>dc:title</ogc:PropertyName><ogc:Literal>%WATER DEPTH%</ogc:Literal></ogc:PropertyIsLike></ogc:Filter></csw:Constraint></csw:Query></csw:GetRecords>');
-        /*var getRecordDoc = Csw4js.unmarshaller.unmarshalString('<?xml version="1.0" encoding="UTF-8"?> <csw:GetRecords xmlns:csw="http://www.opengis.net/cat/csw/2.0.2" xmlns="http://www.occamlab.com/ctl" xmlns:ctl="http://www.occamlab.com/ctl" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:dct="http://purl.org/dc/terms/" xmlns:gml="http://www.opengis.net/gml" xmlns:ogc="http://www.opengis.net/ogc" xmlns:ows="http://www.opengis.net/ows" xmlns:p="http://teamengine.sourceforge.net/parsers" xmlns:parsers="http://www.occamlab.com/te/parsers" xmlns:saxon="http://saxon.sf.net/" xmlns:te="http://www.occamlab.com/te" xmlns:tec="java:com.occamlab.te.TECore" xmlns:tems="java:com.occamlab.te.web.MonitorServlet" xmlns:xi="http://www.w3.org/2001/XInclude" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:xsd="http://www.w3.org/2001/XMLSchema" maxRecords="10" resultType="results" service="CSW" version="2.0.2"><csw:Query typeNames="csw:Record"><csw:ElementSetName>full</csw:ElementSetName><csw:Constraint version="1.1.0"><ogc:Filter><ogc:And><ogc:PropertyIsLike escapeChar="\" singleChar="_" wildCard="%"><ogc:PropertyName>dc:subject</ogc:PropertyName><ogc:Literal>%WATER DEPTH%</ogc:Literal></ogc:PropertyIsLike> <ogc:PropertyIsLike escapeChar="\" singleChar="_" wildCard="%"><ogc:PropertyName>dc:title</ogc:PropertyName><ogc:Literal>%WATER DEPTH%</ogc:Literal></ogc:PropertyIsLike></ogc:And></ogc:Filter></csw:Constraint></csw:Query></csw:GetRecords>');
-        console.log(getRecordDoc.value.abstractQuery.value.constraint);
-
-        // Javascript Object to
-        var xml = Csw4js.marshaller.marshalDocument(getRecordDoc);
-        console.log(xml);//*/
+        // Create csw client
+        var csw = new Csw4js.Csw('http://demo.pycsw.org/cite/csw');
 
         // Create a Filter
         var filter = new Filter().PropertyName('dc:title').isLike('%water%');
-
         filter = filter.and(new Filter().PropertyName('dc:subject').isLike('%polution%'));
-
         filter = filter.and(new Filter().BBOX(-80, 150, 80, -150, 'urn:x-ogc:def:crs:EPSG:6.11:4326'));
 
-        // Create Constraint
-        var constraint = new Constraint(filter);
+        // GetRecords
+        var results = csw.GetRecords(1,10,filter);
 
-        // Create Query
-        var query = new Query('full', constraint);
-
-        // Create de GetRecords Action.
-        var recordAction = new GetRecords(1, 10, query);
-
-        // XML to Post.
-        var myxml = Csw4js.marshaller.marshalDocument(recordAction);
-
-        console.log(myxml);//*/
+        console.log(results);
 
     </script>
 </section>

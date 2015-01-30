@@ -282,24 +282,18 @@ Csw4js.Csw = function(url) {
  *
  * */
 
-Csw4js.Csw.prototype.GetRecords = function(esn, resulttype, typename) {
-    console.log('Get Records');
-    //return 'GetRecords called';
-    var params = {
-        'service': 'CSW',
-        'version': this.version,
-        'request': 'GetRecords',
-        'outputformat': 'application/xml',
-        'outputschema': 'http://www.opengis.net/cat/csw/2.0.2',
-        'resulttype' : resulttype || null,
-        'typenames' : typename || 'csw:Record',
-        'elementsetname': esn || 'full'
-    };
-
-    var url = this.getOperationByName('GetRecords').dcp.http.get;
-    this.xml = Csw4js.loadXMLDoc(Csw4js.Util.buildUrl(url, params));
-
-    return Csw4js.unmarshaller.unmarshalDocument(this.xml);
+Csw4js.Csw.prototype.GetRecords = function(startPosition, maxRecords, filter) {
+    // Create Query
+    var query = new Query('full', new Constraint(filter));
+    // Create de GetRecords Action.
+    var recordAction = new GetRecords(startPosition, maxRecords, query);
+    // XML to Post.
+    var myXML = Csw4js.marshaller.marshalDocument(recordAction);
+    // Post XML
+    // TODO change the httpRequest sync to async.
+    var httpRequest = Csw4js.Util.httpPost(this.url, "application/xml", myXML);
+    var result = Csw4js.unmarshaller.unmarshalDocument(httpRequest.responseXML);
+    return result;
 };
 
 /**
